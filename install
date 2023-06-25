@@ -21,8 +21,7 @@ Suites: ./
 Signed-By: /usr/share/keyrings/collaboraonline-release-keyring.gpg
 EOT
 apt update -y 
-apt install -y coolwsd code-brand
-apt install -y hunspell-en-us
+apt install -y coolwsd code-brand hunspell-en-us
 coolconfig set ssl.enable false
 coolconfig set ssl.termination true
 
@@ -42,4 +41,12 @@ coolconfig set ssl.termination true
 # Change Collabora port to 9990 (co-exist with multi php-fpm on HestiaCP)
 file_path="/lib/systemd/system/coolwsd.service"
 sed -i 's@/usr/share/coolwsd@/usr/share/coolwsd --port 9990@g' "$file_path"
+
+
+
+# Notify installation has finished
+/usr/local/hestia/bin/v-add-user-notification admin Collabra "<span>&#128194;</span> Collabra plugin has finished installing."
+
+
+
 
