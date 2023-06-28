@@ -30,6 +30,7 @@ file_path="/lib/systemd/system/coolwsd.service"
 sed -i 's@/usr/share/coolwsd@/usr/share/coolwsd --port 9990@g' "$file_path"
 systemctl daemon-reload
 systemctl restart coolwsd
+mkdir -p /usr/local/hestia/data/hcpp/collabora_domains
 
 # Notify installation has finished
 /usr/local/hestia/bin/v-add-user-notification admin Collabra "<span>&#128450;</span> Collabra plugin has finished installing."

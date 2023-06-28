@@ -9,4 +9,5 @@ systemctl stop coolwsd
 apt remove -y coolwsd code-brand hunspell-en-us
 rm -f /etc/apt/sources.list.d/collaboraonline.sources
 rm -rf /etc/coolwsd
+rm -rf /usr/local/hestia/data/hcpp/collabora_domains
 rm -f /lib/systemd/system/coolwsd.service
