@@ -17,11 +17,41 @@ if ( ! class_exists( 'Collabora') ) {
         public function __construct() {
             global $hcpp;
             $hcpp->webdav = $this;
-            // $hcpp->add_action( 'priv_unsuspend_domain', [ $this, 'priv_unsuspend_domain' ] );
-            // $hcpp->add_action( 'new_web_domain_ready', [ $this, 'new_web_domain_ready' ] );
-            // $hcpp->add_action( 'priv_delete_user', [ $this, 'priv_delete_user' ] );
             $hcpp->add_action( 'csrf_verified', [ $this, 'csrf_verified' ] );
+            $hcpp->add_action( 'invoke_plugin', [ $this, 'collabora_support' ] );
             $hcpp->add_action( 'render_page', [ $this, 'render_page' ] );
+        }
+
+        /**
+         * Check if Collabora Server is enabled for this user's domain
+         */
+        public function collabora_support( $args ) {
+            if ( $args == null ) return;
+            global $hcpp;
+            $conf_folder = $args['conf_folder'];
+            $enabled = $args['enabled'];
+            $domain = $args['domain'];
+            
+            // Write nginx configuration files
+            
+            return true;
+        }
+
+        // Intercept form submission to record Collabora subfolder option
+        public function csrf_verified() {
+            if ( isset( $_REQUEST['v_domain'] ) ) {
+                global $hcpp;
+                $enabled = false;
+                if ( isset( $_REQUEST['collabora_support'] ) && $_REQUEST['collabora_support'] == 'on' )  {
+                    $enabled = true;
+                }
+                $args = [ 
+                    'enabled' => $enabled,
+                    'domain' => $_REQUEST['v_domain'],
+                    'conf_folder' => str_replace( '/web/', '/conf/web/', $_REQUEST['v_ftp_pre_path']) 
+                ];
+                $hcpp->run( 'invoke-plugin collabora_support ' . escapeshellarg( json_encode( $args ) ) );
+            }
         }
 
         /**
@@ -41,7 +71,7 @@ if ( ! class_exists( 'Collabora') ) {
                 }
                 $code = '<div class="form-check u-mb10">
                     <input class="form-check-input" type="checkbox" name="collabora_support" id="collabora_support" ' . $checked . '>
-                    <label for="collabora_support">Enable Collabora subfolder <small>(' . $domain . '/coolwsd)</small></label>
+                    <label for="collabora_support">Enable Collabora Server in subfolder <small>(' . $domain . '/coolwsd)</small></label>
                 </div>';
                 $adv_div = '<div x-cloak x-show="showAdvanced">';
                 $before = $hcpp->getLeftMost( $content, $adv_div ) . $adv_div;
@@ -52,13 +82,6 @@ if ( ! class_exists( 'Collabora') ) {
             return $args;
         }
 
-        // Intercept form submission to include Collabora subfolder option
-        public function csrf_verified() {
-            if ( isset( $_REQUEST['domain'] ) ) {
-                global $hcpp;
-                $hcpp->log( $_REQUEST );
-            }
-        }
     }
     new Collabora();
 } 
