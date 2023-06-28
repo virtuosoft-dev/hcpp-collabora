@@ -34,8 +34,9 @@ if ( ! class_exists( 'Collabora') ) {
                     <input class="form-check-input" type="checkbox" name="collabora_support" id="collabora_support">
                     <label for="collabora_support">Enable Collabora (/coolwsd subfolder)</label>
                 </div>';
-                $before = $hcpp->getLeftMost( $content, '<div x-show="showAdvanced">' ) . '<div x-show="showAdvanced">';
-                $content = $hcpp->delLeftMost( $content, '<div x-show="showAdvanced">' );
+                $adv_div = '<div x-cloak x-show="showAdvanced">';
+                $before = $hcpp->getLeftMost( $content, $adv_div ) . $adv_div;
+                $content = $hcpp->delLeftMost( $content, $adv_div );
                 $content = $before . $code . $content;
                 $args['content'] = $content;
             }
