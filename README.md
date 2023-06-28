@@ -32,7 +32,7 @@ A notification will appear under the admin user account indicating *”WebDWAV p
 ```
 cd /usr/local/hestia/plugins/collabora
 ./install
-touch “/usr/local/hestia/data/hcpp/installed/collabora”
+touch "/usr/local/hestia/data/hcpp/installed/collabora"
 ```
 
 &nbsp;
