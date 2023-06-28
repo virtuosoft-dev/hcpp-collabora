@@ -56,7 +56,7 @@ You can help this author’s open source development endeavors by donating any a
 </div>
 
 
-<!-—————————————————————————>
+<!-------------------------->
 
 [KBD]: https://virtuosoft.com/donate
 
