@@ -32,3 +32,4 @@ sudo systemctl restart coolwsd
 
 # Notify installation has finished
 /usr/local/hestia/bin/v-add-user-notification admin Collabra "<span>&#128194;</span> Collabra plugin has finished installing."
+
