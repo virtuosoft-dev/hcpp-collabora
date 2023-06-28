@@ -31,9 +31,17 @@ if ( ! class_exists( 'Collabora') ) {
             if ( $args['page'] == 'edit_web' ) {
                 global $hcpp;
                 $content = $args['content'];
+                $domain = '';
+                if ( isset( $_REQUEST['domain'] ) ) {
+                    $domain = $_REQUEST['domain'];
+                }
+                $checked = '';
+                if ( file_exists( '/usr/local/hestia/data/hcpp/collabora_domains' . $domain ) ) {
+                    $checked = 'checked="true"';
+                }
                 $code = '<div class="form-check u-mb10">
-                    <input class="form-check-input" type="checkbox" name="collabora_support" id="collabora_support" checked="true">
-                    <label for="collabora_support">Enable Collabora subfolder (' . $_GET['domain'] . '/coolwsd)</label>
+                    <input class="form-check-input" type="checkbox" name="collabora_support" id="collabora_support" ' . $checked . '>
+                    <label for="collabora_support">Enable Collabora subfolder <small>(' . $domain . '/coolwsd)</small></label>
                 </div>';
                 $adv_div = '<div x-cloak x-show="showAdvanced">';
                 $before = $hcpp->getLeftMost( $content, $adv_div ) . $adv_div;
