@@ -25,28 +25,10 @@ apt install -y coolwsd code-brand hunspell-en-us
 coolconfig set ssl.enable false
 coolconfig set ssl.termination true
 
-# TODO: set random admin pw on initial install
-#To create an administrator user and its password, you can run this command
-#
-#$ sudo coolconfig set-admin-password
-#The output will be like this:
-#
-#Enter admin username [admin]:
-#Enter admin password:
-#Confirm admin password:
-#Saving configuration to : /etc/coolwsd/coolwsd.xml …
-#Saved
-#
-
 # Change Collabora port to 9990 (co-exist with multi php-fpm on HestiaCP)
 file_path="/lib/systemd/system/coolwsd.service"
 sed -i 's@/usr/share/coolwsd@/usr/share/coolwsd --port 9990@g' "$file_path"
-
-
+sudo systemctl restart coolwsd
 
 # Notify installation has finished
 /usr/local/hestia/bin/v-add-user-notification admin Collabra "<span>&#128194;</span> Collabra plugin has finished installing."
-
-
-
-
