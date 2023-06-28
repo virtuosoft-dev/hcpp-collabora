@@ -42,5 +42,5 @@ if ( ! class_exists( 'Collabora') ) {
             return $args;
         }
     }
-    new VSCode();
+    new Collabora();
 } 
