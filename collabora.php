@@ -36,7 +36,7 @@ if ( ! class_exists( 'Collabora') ) {
                     $domain = $_REQUEST['domain'];
                 }
                 $checked = '';
-                if ( file_exists( '/usr/local/hestia/data/hcpp/collabora_domains' . $domain ) ) {
+                if ( file_exists( '/usr/local/hestia/data/hcpp/collabora_domains/' . $domain ) ) {
                     $checked = 'checked="true"';
                 }
                 $code = '<div class="form-check u-mb10">
