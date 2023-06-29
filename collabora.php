@@ -26,11 +26,12 @@ if ( ! class_exists( 'Collabora') ) {
          * Check if Collabora Server is enabled for this user's domain
          */
         public function collabora_support( $args ) {
-            if ( $args == null ) return;
+            if ( $args[0] != 'collabora_support' ) return $args;
             global $hcpp;
-            $conf_folder = $args['conf_folder'];
-            $enabled = $args['enabled'];
-            $domain = $args['domain'];
+            $options = json_decode( $args[1], true );
+            $conf_folder = $options['conf_folder'];
+            $enabled = $options['enabled'];
+            $domain = $options['domain'];
             
             // Write nginx configuration files
             if ($enabled) {
