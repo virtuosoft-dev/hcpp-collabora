@@ -33,5 +33,5 @@ systemctl restart coolwsd
 mkdir -p /usr/local/hestia/data/hcpp/collabora_domains
 
 # Notify installation has finished
-/usr/local/hestia/bin/v-add-user-notification admin Collabra "<span>&#128450;</span> Collabra plugin has finished installing."
+/usr/local/hestia/bin/v-add-user-notification admin Collabora "<span>&#128450;</span> Collabora plugin has finished installing."
 
