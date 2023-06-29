@@ -37,13 +37,12 @@ touch "/usr/local/hestia/data/hcpp/installed/collabora"
 
 &nbsp;
 ## Using Collabora
-This plugin will create a new domain for each HestiaCP user with the naming convention:
+This plugin will create a `Enable Collabora Server in subfolder` checkbox in the **Advanced Options** section of the web edit page for a given domain. This will all your website to access Collabora services via the URL with the given subfolder; i.e. for domain `test4.dev.cc`, at URL `https://test4.dev.cc/coolwsd`.
 
-```
-coolwsd-username.domain.tld
-```
+<br><img src='images/adv-options.jpg' width='65%'><br>
+<sub>Figure 1 - The Enable Collabora option under the Advanced Options button</sub>
 
-Where `username` is the username of the HestiaCP user account and `domain.tld` is the domain for the HestiaCP instance.
+<br>
 
 ## Support the creator
 You can help this author’s open source development endeavors by donating any amount to Stephen J. Carnam @ Virtuosoft. Your donation, no matter how large or small helps pay for essential time and resources to create MIT and GPL licensed projects that you and the world can benefit from. Click the link below to donate today :)
