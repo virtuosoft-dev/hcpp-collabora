@@ -33,7 +33,11 @@ if ( ! class_exists( 'Collabora') ) {
             $domain = $args['domain'];
             
             // Write nginx configuration files
-            
+            if ($enabled) {
+                touch( '/usr/local/hestia/data/hcpp/collabora_domains/' . $domain );
+            }else{
+                unlink( '/usr/local/hestia/data/hcpp/collabora_domains/' . $domain);
+            }
             return true;
         }
 
