@@ -5,4 +5,14 @@ location /coolwsd {
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
+    proxy_read_timeout 36000s;  # Adjust timeout as needed
+    proxy_send_timeout 36000s;  # Adjust timeout as needed
+    
+    location ~ ^/coolwsd/(.*)$ {
+        proxy_pass http://127.0.0.1:9990/$1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 36000s;  # Adjust timeout as needed
+        proxy_send_timeout 36000s;  # Adjust timeout as needed
+    }
 }
