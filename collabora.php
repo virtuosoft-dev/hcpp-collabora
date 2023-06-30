@@ -36,8 +36,15 @@ if ( ! class_exists( 'Collabora') ) {
             // Write nginx configuration files
             if ($enabled) {
                 touch( '/usr/local/hestia/data/hcpp/collabora_domains/' . $domain );
+                $content = file_get_contents( __DIR__ . '/conf-web/nginx.conf_coolwsd' );
+                file_put_contents( $conf_folder . '/nginx.conf_coolwsd', $content );
+                $content = file_get_contents( __DIR__ . '/conf-web/nginx.ssl.conf_coolwsd' );
+                file_put_contents( $conf_folder . '/nginx.ssl.conf_coolwsd', $content );
+
             }else{
                 unlink( '/usr/local/hestia/data/hcpp/collabora_domains/' . $domain);
+                unlink( $conf_folder . '/nginx.conf_coolwsd' );
+                unlink( $conf_folder . '/nginx.ssl.conf_coolwsd' );
             }
             return true;
         }
