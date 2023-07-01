@@ -18,8 +18,7 @@ Then simply clone the repo to your plugins folder, with the name `collabora`:
 
 ```
 cd /usr/local/hestia/plugins
-git clone https://github.com/virtuosoft-dev/hcpp-collabora
-collabora
+git clone https://github.com/virtuosoft-dev/hcpp-collabora collabora
 ```
 
 Note: It is important that the destination plugin folder name is `collabora`.
