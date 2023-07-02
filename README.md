@@ -26,7 +26,7 @@ Note: It is important that the destination plugin folder name is `collabora`.
 
 Be sure to logout and login again to your Hestia Control Panel as the admin user or, as admin, visit Server (gear icon) -> Configure -> Plugins -> Save; the plugin will immediately start installing Collabora depedencies in the background. 
 
-A notification will appear under the admin user account indicating *”WebDWAV plugin has finished installing”* when complete. This may take awhile before the options appear in Hestia. You can force manual installation via:
+A notification will appear under the admin user account indicating *”Collabora plugin has finished installing”* when complete. This may take awhile before the options appear in Hestia. You can force manual installation via:
 
 ```
 cd /usr/local/hestia/plugins/collabora
