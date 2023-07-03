@@ -16,7 +16,7 @@ if ( ! class_exists( 'Collabora') ) {
          */
         public function __construct() {
             global $hcpp;
-            $hcpp->webdav = $this;
+            $hcpp->collabora = $this;
             $hcpp->add_action( 'csrf_verified', [ $this, 'csrf_verified' ] );
             $hcpp->add_action( 'invoke_plugin', [ $this, 'collabora_support' ] );
             $hcpp->add_action( 'render_page', [ $this, 'render_page' ] );
