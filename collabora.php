@@ -83,7 +83,7 @@ if ( ! class_exists( 'Collabora') ) {
                 }
                 $code = '<div class="form-check u-mb10">
                     <input class="form-check-input" type="checkbox" name="collabora_support" id="collabora_support" ' . $checked . '>
-                    <label for="collabora_support">Enable Collabora Server in subfolder <small>(' . $domain . '/coolwsd)</small></label>
+                    <label for="collabora_support">Enable Collabora Online services in root.</label>
                 </div>';
                 $adv_div = '<div x-cloak x-show="showAdvanced">';
                 $before = $hcpp->getLeftMost( $content, $adv_div ) . $adv_div;
