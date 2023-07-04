@@ -7,6 +7,12 @@ then
     exit
 fi
 
+############################################
+# Install templates
+############################################
+
+rsync -r ./nginx/ /usr/local/hestia/data/templates/web/nginx/
+
 #########################################################
 # Install Collabora and English spellcheck and thesaurus
 #########################################################
@@ -31,12 +37,6 @@ sed -i 's@/usr/share/coolwsd@/usr/share/coolwsd --port 9990@g' "$file_path"
 systemctl daemon-reload
 systemctl restart coolwsd
 mkdir -p /usr/local/hestia/data/hcpp/collabora_domains
-
-############################################
-# Install templates
-############################################
-
-rsync -r ./nginx/ /usr/local/hestia/data/templates/web/nginx/
 
 # Notify installation has finished
 /usr/local/hestia/bin/v-add-user-notification admin Collabora "<span>&#128450;</span> Collabora plugin has finished installing."
