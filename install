@@ -7,12 +7,6 @@ then
     exit
 fi
 
-############################################
-# Install templates
-############################################
-
-rsync -r ./nginx/ /usr/local/hestia/data/templates/web/nginx/
-
 #########################################################
 # Install Collabora and English spellcheck and thesaurus
 #########################################################
