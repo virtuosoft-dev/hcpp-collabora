@@ -1,7 +1,7 @@
 <?php
 /**
  * Extend the HestiaCP Pluginable object with our Collabora object for
- * allocating a shared Collabora Server for user accounts.
+ * allocating a shared Collabora Server domain.
  * 
  * @version 1.0.0
  * @license GPL-3.0
@@ -17,9 +17,12 @@ if ( ! class_exists( 'Collabora') ) {
         public function __construct() {
             global $hcpp;
             $hcpp->collabora = $this;
-            $hcpp->add_action( 'csrf_verified', [ $this, 'csrf_verified' ] );
-            $hcpp->add_action( 'invoke_plugin', [ $this, 'collabora_support' ] );
-            $hcpp->add_action( 'render_page', [ $this, 'render_page' ] );
+            $hcpp->add_action( 'priv_change_web_domain_proxy_tpl', [ $this, 'priv_change_web_domain_proxy_tpl' ] );
+            $hcpp->add_action( 'pre_delete_web_domain_backend', [ $this, 'pre_delete_web_domain_backend' ] );
+            $hcpp->add_action( 'priv_suspend_web_domain', [ $this, 'priv_suspend_web_domain' ] );
+            $hcpp->add_action( 'priv_unsuspend_domain', [ $this, 'priv_unsuspend_domain' ] );
+            $hcpp->add_action( 'priv_update_sys_queue', [ $this, 'priv_update_sys_queue' ] );
+            $hcpp->add_action( 'hcpp_runuser', [ $this, 'hcpp_runuser' ] );
         }
 
         /**

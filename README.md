@@ -36,10 +36,11 @@ touch "/usr/local/hestia/data/hcpp/installed/collabora"
 
 &nbsp;
 ## Using Collabora
-This plugin will create a `Enable Collabora Server in subfolder` checkbox in the **Advanced Options** section of the web edit page for a given domain. This will all your website to access Collabora services via the URL with the given subfolder; i.e. for domain `test4.dev.cc`, at URL `https://test4.dev.cc/coolwsd`.
+Collabora Online server requires a dedicated domain or subdomain; this plugin will create a `Collabora Online` item in the **Proxy Template** drop down listbox, under the **Advanced Options** section of the web edit page for a given domain. Use this option to
+designate a unique domain name for Collabora Online services. 
 
 <br><img src='images/adv-options.jpg' width='65%'><br>
-<sub>Figure 1 - The Enable Collabora option under the Advanced Options button</sub>
+<sub>Figure 1 - Collabora Online item via Advanced Options, Proxy Template</sub>
 
 <br>
 
