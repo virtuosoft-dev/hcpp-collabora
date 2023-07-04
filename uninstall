@@ -11,3 +11,9 @@ rm -f /etc/apt/sources.list.d/collaboraonline.sources
 rm -rf /etc/coolwsd
 rm -rf /usr/local/hestia/data/hcpp/collabora_domains
 rm -f /lib/systemd/system/coolwsd.service
+
+############################################
+# Uninstall templates
+############################################
+rm -f /usr/local/hestia/data/templates/web/nginx/Collabora_Onlime.tpl
+rm -f /usr/local/hestia/data/templates/web/nginx/Collabora_Onlime.stpl

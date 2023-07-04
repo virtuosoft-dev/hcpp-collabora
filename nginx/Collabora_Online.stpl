@@ -3,6 +3,7 @@
 #
 server {
     listen      %ip%:%proxy_ssl_port% ssl http2;
+    listen      127.0.0.1:%proxy_ssl_port% ssl http2;
     server_name %domain_idn% %alias_idn%;
     ssl_certificate      %ssl_pem%;
     ssl_certificate_key  %ssl_key%;

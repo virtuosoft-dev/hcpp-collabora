@@ -32,6 +32,12 @@ systemctl daemon-reload
 systemctl restart coolwsd
 mkdir -p /usr/local/hestia/data/hcpp/collabora_domains
 
+############################################
+# Install templates
+############################################
+
+rsync -r ./nginx/ /usr/local/hestia/data/templates/web/nginx/
+
 # Notify installation has finished
 /usr/local/hestia/bin/v-add-user-notification admin Collabora "<span>&#128450;</span> Collabora plugin has finished installing."
 

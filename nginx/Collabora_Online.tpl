@@ -4,6 +4,7 @@
 
 server {
     listen      %ip%:%proxy_port%;
+    listen      127.0.0.1:%proxy_port%;
     server_name %domain_idn% %alias_idn%;
 
     include %home%/%user%/conf/web/%domain%/nginx.forcessl.conf*;
