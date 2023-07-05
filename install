@@ -21,7 +21,7 @@ Suites: ./
 Signed-By: /usr/share/keyrings/collaboraonline-release-keyring.gpg
 EOT
 apt update -y 
-apt install -y coolwsd code-brand hunspell-en-us mythes-en-us
+apt install -y coolwsd code-brand hunspell-en-us mythes-en-us collaboraoffice-dict-en
 coolconfig set ssl.enable false
 coolconfig set ssl.termination true
 
