@@ -41,10 +41,18 @@ if ( ! class_exists( 'Collabora') ) {
                 $content = file_get_contents( __DIR__ . '/conf-web/nginx.ssl.conf_coolwsd' );
                 file_put_contents( $conf_folder . '/nginx.ssl.conf_coolwsd', $content );
 
+                // Add Listen 127.0.0.1
+                $this->addInterfaceToListen( $conf_folder . '/nginx.conf' );
+                $this->addInterfaceToListen( $conf_folder . '/nginx.ssl.conf' );
+
             }else{
                 unlink( '/usr/local/hestia/data/hcpp/collabora_domains/' . $domain);
                 unlink( $conf_folder . '/nginx.conf_coolwsd' );
                 unlink( $conf_folder . '/nginx.ssl.conf_coolwsd' );
+
+                // Remove Listen 127.0.01
+                $this->removeInterfaceToListen( $conf_folder . '/nginx.conf' );
+                $this->removeInterfaceToListen( $conf_folder . '/nginx.ssl.conf' );
             }
             return true;
         }
@@ -94,6 +102,61 @@ if ( ! class_exists( 'Collabora') ) {
             return $args;
         }
 
+        /**
+         * Add 127.0.0.1 as an interface to listen
+         */
+        public function addInterfaceToListen( $file ) {
+            $content = file_get_contents( $file );
+        
+            // HTTP nginx.conf
+            if ( strpos( $content, ':443 ssl http2;' ) === false ) {
+                // Check if 127.0.0.1 is already present
+                if ( preg_match( '/\blisten\s+(?:\S+\s+)?(\d+\.\d+\.\d+\.\d+):80;/i', $content, $matches ) ) {
+                    $existingIP = $matches[1];
+                    if ( $existingIP === '127.0.0.1' ) {
+                        return; // Already present, no need to make changes
+                    }
+                }
+            
+                // Add 127.0.0.1 as an interface to listen
+                $newContent = preg_replace( '/(listen\s+(?:\S+\s+)?)(\d+\.\d+\.\d+\.\d+):80;/i', '$1$2:80;' . PHP_EOL . '    listen      127.0.0.1:80;', $content );
+
+            // HTTPS nginx.ssl.conf
+            }else{
+                // Check if 127.0.0.1 is already present
+                if ( preg_match( '/\blisten\s+(?:\S+\s+)?(\d+\.\d+\.\d+\.\d+):443\s+ssl\s+http2;/i', $content, $matches ) ) {
+                    $existingIP = $matches[1];
+                    if ( $existingIP === '127.0.0.1' ) {
+                        return; // Already present, no need to make changes
+                    }
+                }
+
+                // Add 127.0.0.1 as an interface to listen
+                $newContent = preg_replace( '/(listen\s+(?:\S+\s+)?)(\d+\.\d+\.\d+\.\d+):443\s+ssl\s+http2;/i', '$1$2:443 ssl http2;' . PHP_EOL . '    listen      127.0.0.1:443 ssl http2;', $content );
+            }
+            file_put_contents( $file, $newContent );
+        }
+        
+        /**
+         * Remove 127.0.0.1 as an interface to listen
+         */
+        function removeInterfaceToListen( $file ) {
+            $content = file_get_contents( $file );
+
+            // HTTP nginx.conf
+            if ( strpos( $content, ':443 ssl http2;' ) === false ) {
+                
+                // Remove 127.0.0.1 from the interface to listen
+                $newContent = preg_replace( '/\s*listen\s+(?:\S+\s+)?127.0.0.1:443\s+ssl\s+http2;\s*/i', '', $content );
+            
+            // HTTPS nginx.ssl.conf
+            }else{
+                
+                // Remove 127.0.0.1 from the interface to listen
+                $newContent = preg_replace('/\s*listen\s+(?:\S+\s+)?127.0.0.1:80;\s*/i', '', $content);
+            }
+            file_put_contents( $file, $newContent );
+        }
     }
     new Collabora();
 } 
