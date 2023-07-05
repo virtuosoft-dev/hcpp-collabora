@@ -134,15 +134,15 @@ if ( ! class_exists( 'Collabora') ) {
 
             // HTTP nginx.conf
             if ( strpos( $content, ':443 ssl http2;' ) === false ) {
-                
+
                 // Remove 127.0.0.1 from the interface to listen
-                $newContent = preg_replace( '/\s*listen\s+(?:\S+\s+)?127.0.0.1:443\s+ssl\s+http2;\s*/i', '', $content );
+                $newContent = preg_replace('/\s*listen\s+(?:\S+\s+)?127.0.0.1:80;\s*/i', '', $content);
             
             // HTTPS nginx.ssl.conf
             }else{
-                
+
                 // Remove 127.0.0.1 from the interface to listen
-                $newContent = preg_replace('/\s*listen\s+(?:\S+\s+)?127.0.0.1:80;\s*/i', '', $content);
+                $newContent = preg_replace( '/\s*listen\s+(?:\S+\s+)?127.0.0.1:443\s+ssl\s+http2;\s*/i', '', $content );
             }
             file_put_contents( $file, $newContent );
         }
