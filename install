@@ -27,7 +27,9 @@ coolconfig set ssl.termination true
 
 # Change Collabora port to 9990 (co-exist with multi php-fpm on HestiaCP)
 file_path="/lib/systemd/system/coolwsd.service"
-sed -i 's@/usr/share/coolwsd@/usr/share/coolwsd --port 9990@g' "$file_path"
+if ! grep -q -- '--port 9990' "$file_path"; then
+    sed -i 's@/usr/share/coolwsd@/usr/share/coolwsd --port 9990@g' "$file_path"
+fi
 systemctl daemon-reload
 systemctl restart coolwsd
 mkdir -p /usr/local/hestia/data/hcpp/collabora_domains
