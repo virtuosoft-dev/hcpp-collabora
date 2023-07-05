@@ -107,29 +107,18 @@ if ( ! class_exists( 'Collabora') ) {
          */
         public function addInterfaceToListen( $file ) {
             $content = file_get_contents( $file );
-        
+
+            // Skip if already added
+            if ( strpos( $content, 'listen      127.0.0.1:' ) !== false ) return;
+
             // HTTP nginx.conf
             if ( strpos( $content, ':443 ssl http2;' ) === false ) {
-                // Check if 127.0.0.1 is already present
-                if ( preg_match( '/\blisten\s+(?:\S+\s+)?(\d+\.\d+\.\d+\.\d+):80;/i', $content, $matches ) ) {
-                    $existingIP = $matches[1];
-                    if ( $existingIP === '127.0.0.1' ) {
-                        return; // Already present, no need to make changes
-                    }
-                }
-            
+
                 // Add 127.0.0.1 as an interface to listen
                 $newContent = preg_replace( '/(listen\s+(?:\S+\s+)?)(\d+\.\d+\.\d+\.\d+):80;/i', '$1$2:80;' . PHP_EOL . '    listen      127.0.0.1:80;', $content );
 
             // HTTPS nginx.ssl.conf
             }else{
-                // Check if 127.0.0.1 is already present
-                if ( preg_match( '/\blisten\s+(?:\S+\s+)?(\d+\.\d+\.\d+\.\d+):443\s+ssl\s+http2;/i', $content, $matches ) ) {
-                    $existingIP = $matches[1];
-                    if ( $existingIP === '127.0.0.1' ) {
-                        return; // Already present, no need to make changes
-                    }
-                }
 
                 // Add 127.0.0.1 as an interface to listen
                 $newContent = preg_replace( '/(listen\s+(?:\S+\s+)?)(\d+\.\d+\.\d+\.\d+):443\s+ssl\s+http2;/i', '$1$2:443 ssl http2;' . PHP_EOL . '    listen      127.0.0.1:443 ssl http2;', $content );
