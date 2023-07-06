@@ -6,7 +6,11 @@ export DEBIAN_FRONTEND=noninteractive
 ############################################
 
 systemctl stop coolwsd
-apt remove -y coolwsd code-brand hunspell-en-us
+apt remove -y inotify-tools psmisc
+apt remove -y code-brand
+apt remove -y collaboraofficebasis-en-us
+apt remove -y collaboraoffice-dict-en
+apt remove -y coolwsd
 rm -f /etc/apt/sources.list.d/collaboraonline.sources
 rm -rf /etc/coolwsd
 rm -rf /usr/local/hestia/data/hcpp/collabora_domains
