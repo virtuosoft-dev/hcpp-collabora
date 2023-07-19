@@ -18,7 +18,7 @@ if ( ! class_exists( 'Collabora') ) {
             global $hcpp;
             $hcpp->collabora = $this;
             $hcpp->add_action( 'csrf_verified', [ $this, 'csrf_verified' ] );
-            $hcpp->add_action( 'invoke_plugin', [ $this, 'collabora_support' ] );
+            $hcpp->add_action( 'hcpp_invoke_plugin', [ $this, 'collabora_support' ] );
             $hcpp->add_action( 'render_page', [ $this, 'render_page' ] );
         }
 
