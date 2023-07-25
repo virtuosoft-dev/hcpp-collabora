@@ -17,9 +17,9 @@ if ( ! class_exists( 'Collabora') ) {
         public function __construct() {
             global $hcpp;
             $hcpp->collabora = $this;
-            $hcpp->add_action( 'csrf_verified', [ $this, 'csrf_verified' ] );
+            $hcpp->add_action( 'hcpp_csrf_verified', [ $this, 'hcpp_csrf_verified' ] );
             $hcpp->add_action( 'hcpp_invoke_plugin', [ $this, 'collabora_support' ] );
-            $hcpp->add_action( 'render_page', [ $this, 'render_page' ] );
+            $hcpp->add_action( 'hcpp_render_page', [ $this, 'hcpp_render_page' ] );
         }
 
         /**
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Collabora') ) {
         }
 
         // Intercept form submission to record Collabora subfolder option
-        public function csrf_verified() {
+        public function hcpp_csrf_verified() {
             if ( isset( $_REQUEST['v_domain'] ) ) {
                 global $hcpp;
                 $enabled = false;
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Collabora') ) {
         /**
          * Inject Collabora Server option under Advanced Options
          */
-        public function render_page( $args ) {
+        public function hcpp_render_page( $args ) {
             if ( $args['page'] == 'edit_web' ) {
                 global $hcpp;
                 $content = $args['content'];
