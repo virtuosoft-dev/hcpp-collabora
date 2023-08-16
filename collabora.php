@@ -19,7 +19,7 @@ if ( ! class_exists( 'Collabora') ) {
             $hcpp->collabora = $this;
             $hcpp->add_action( 'hcpp_csrf_verified', [ $this, 'hcpp_csrf_verified' ] );
             $hcpp->add_action( 'hcpp_invoke_plugin', [ $this, 'collabora_support' ] );
-            $hcpp->add_action( 'hcpp_render_page', [ $this, 'hcpp_render_page' ] );
+            $hcpp->add_action( 'hcpp_render_body', [ $this, 'hcpp_render_body' ] );
         }
 
         /**
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Collabora') ) {
         /**
          * Inject Collabora Server option under Advanced Options
          */
-        public function hcpp_render_page( $args ) {
+        public function hcpp_render_body( $args ) {
             if ( $args['page'] == 'edit_web' ) {
                 global $hcpp;
                 $content = $args['content'];
